@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentportfolio/api.dart';
 
-
 List data = [];
 
 void main() {
@@ -14,24 +13,74 @@ void main() {
 }
 
 class LandingPageProfile extends StatefulWidget {
-  final String name2;
+  // final String name2;
+  // final String rollno;
+  // final String ph;
+  // final String mail;
+  // final String dob;
+  // final String gender;
+  // final String degree;
+  // final String blood_group;
+  // final String regno;
+  // final String community;
+  final String name;
   final String rollno;
-  final String ph;
-  final String mail;
+  final String regno;
   final String dob;
-  final String gender;
-  final String degree;
+  final String clg_mail;
+  final String mobileno;
   final String blood_group;
+  final String degree;
+  final String community;
+  final String pers_mail;
+  final String _10thmark;
+  final String _10thpercentage;
+  final String _12thmark;
+  final String _12th_per;
+  final String _12thcutoff;
+  final String diplomapercentage;
+  final String quota;
+  final String _1stsemestergpa;
+  final String _2ndsemestergpa;
+  final String _3rdsemestergpa;
+  final String cgpa;
+  final String historyofarrears;
+  final String curr_arrear;
 
   const LandingPageProfile(
-    this.name2,
+    // this.name2,
+    // this.rollno,
+    // this.ph,
+    // this.mail,
+    // this.dob,
+    // this.gender,
+    // this.degree,
+    // this.blood_group,
+    // this.regno,
+    // this.community,
+    this.name,
     this.rollno,
-    this.ph,
-    this.mail,
+    this.regno,
     this.dob,
-    this.gender,
+    this.clg_mail,
+    this.mobileno,
+    this.blood_group,
     this.degree,
-    this.blood_group, {
+    this.community,
+    this.pers_mail,
+    this._10thmark,
+    this._10thpercentage,
+    this._12thmark,
+    this._12th_per,
+    this._12thcutoff,
+    this.diplomapercentage,
+    this.quota,
+    this._1stsemestergpa,
+    this._2ndsemestergpa,
+    this._3rdsemestergpa,
+    this.cgpa,
+    this.historyofarrears,
+    this.curr_arrear, {
     Key? key,
   }) : super(key: key);
 
@@ -65,14 +114,29 @@ class _LandingPageProfileState extends State<LandingPageProfile> {
               builder: (context) => StudentDetail(
                 [
                   {
-                    'name': widget.name2,
+                    'name': widget.name,
                     'rollno': widget.rollno,
-                    'phone': widget.ph,
-                    'mail': widget.mail,
+                    'regno': widget.regno,
                     'dob': widget.dob,
-                    'gender': widget.gender,
-                    'degree': widget.degree,
+                    'clg_mail': widget.clg_mail,
+                    'mobileno': widget.mobileno,
                     'blood_group': widget.blood_group,
+                    'degree': widget.degree,
+                    'community': widget.community,
+                    'pers_mail': widget.pers_mail,
+                    '10thmark': widget._10thmark,
+                    '10thpercentage': widget._10thpercentage,
+                    '12thmark': widget._12thmark,
+                    '12th_per': widget._12th_per,
+                    '12thcutoff': widget._12thcutoff,
+                    'diplomapercentage': widget.diplomapercentage,
+                    'quota': widget.quota,
+                    '1stsemestergpa': widget._1stsemestergpa,
+                    '2ndsemestergpa': widget._2ndsemestergpa,
+                    '3rdsemestergpa': widget._3rdsemestergpa,
+                    'cgpa': widget.cgpa,
+                    'historyofarrears': widget.historyofarrears,
+                    'curr_arrear': widget.curr_arrear
                   }
                 ],
               ),
@@ -89,7 +153,7 @@ class _LandingPageProfileState extends State<LandingPageProfile> {
           ),
           title: Center(
             child: Text(
-              widget.name2,
+              widget.name,
               style: const TextStyle(color: Colors.black, fontSize: 20),
             ),
           ),
@@ -135,15 +199,43 @@ class StudentDetail extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Profile('Name', Icons.person, item['name']),
+                    // Profile('Rollno', Icons.assignment_ind, item['rollno']),
+                    // Profile('Phone', Icons.phone, item['phone']),
+                    // Profile('mail', Icons.mail, item['mail'].toString()),
+                    // Profile('DOB', Icons.calendar_month_rounded, item['dob']),
+                    // Profile('Gender', Icons.male_rounded, item['gender']),
+                    // Profile('Degree', Icons.workspace_premium, item['degree']),
+                    // Profile(
+                    //     'BloodGroup', Icons.water_drop, item['blood_group']),
+                    // Profile('Degree', Icons.workspace_premium, item['degree']),
+                    // Profile(
+                    //     'Degree', Icons.workspace_premium, item['community']),
+
                     Profile('Name', Icons.person, item['name']),
                     Profile('Rollno', Icons.assignment_ind, item['rollno']),
-                    Profile('Phone', Icons.phone, item['phone']),
-                    Profile('mail', Icons.mail, item['mail'].toString()),
-                    Profile('DOB', Icons.calendar_month_rounded, item['dob']),
-                    Profile('Gender', Icons.male_rounded, item['gender']),
-                    Profile('Degree', Icons.workspace_premium, item['degree']),
+                    Profile('Regno', Icons.perm_identity, item['regno']),
+                    Profile('DOB', Icons.date_range, item['dob']),
+                    Profile('College Email', Icons.email, item['clg_mail']),
+                    Profile('Mobile Number', Icons.phone, item['mobileno']),
+                    Profile('Blood Group', Icons.local_hospital, item['blood_group']),
+                    Profile('Degree', Icons.school, item['degree']),
+                    Profile('Community', Icons.group, item['community']),
+                    Profile('Personal Email', Icons.email, item['pers_mail']),
+                    Profile('10th Mark', Icons.assignment, item['10thmark']),
+                    Profile('10th Percentage', Icons.assignment, item['10thpercentage']),
+                    Profile('12th Mark', Icons.assignment, item['12thmark']),
+                    Profile('12th Percentage', Icons.assignment, item['12th_per']),
+                    Profile('12th Cutoff', Icons.assignment, item['12thcutoff']),
+                    Profile('Diploma Percentage', Icons.assignment,item['diplomapercentage']),
+                    Profile('Quota', Icons.assignment, item['quota']),
+                    Profile('1st Semester GPA', Icons.assignment,item['1stsemestergpa']),
+                    Profile('2nd Semester GPA', Icons.assignment,item['2ndsemestergpa']),
+                    Profile('3rd Semester GPA', Icons.assignment,item['3rdsemestergpa']),
+                    Profile('CGPA', Icons.assignment, item['cgpa']),
+                    Profile('History of Arrears', Icons.warning, item['historyofarrears']),
                     Profile(
-                        'BloodGroup', Icons.water_drop, item['blood_group']),
+                        'Current Arrear', Icons.warning, item['curr_arrear'])
 
                     // Add more Profile widgets for other details if needed
                   ],

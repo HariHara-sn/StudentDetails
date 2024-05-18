@@ -18,10 +18,15 @@ class ApiEndpoint extends StatefulWidget {
 class _ApiEndpointState extends State<ApiEndpoint> {
   Future<void> fetchData() async {
     final response =
-        await http.get(Uri.parse('https://retoolapi.dev/fg1LUJ/data'));
+        // await http.get(Uri.parse('https://retoolapi.dev/fg1LUJ/data')); //old dataset
+        // await http.get(Uri.parse('https://retoolapi.dev/etpw05/data')); // google sheet
+        await http.get(Uri.parse(
+            'https://retoolapi.dev/fINtRU/data')); // priyabharathi copy
 
     setState(() {
       data = jsonDecode(response.body);
+      data.removeLast();  //do this when you get null other wise remove this line 🔴
+      print(data);
     });
   }
 
@@ -48,7 +53,7 @@ class _ApiEndpointState extends State<ApiEndpoint> {
 }
 
 class LandingPage extends StatefulWidget {
-  final List data;
+  final List<dynamic> data;
 
   const LandingPage(this.data, {Key? key}) : super(key: key);
 
@@ -57,13 +62,14 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  late List filteredData;
+  late List<dynamic> filteredData;
   final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     filteredData = widget.data;
+    print(filteredData[0]['name'].runtimeType);
   }
 
   void filterSearchResults(String query) {
@@ -117,15 +123,40 @@ class _LandingPageState extends State<LandingPage> {
         itemCount: filteredData.length,
         itemBuilder: (context, index) {
           return LandingPageProfile(
-            filteredData[index]['name'],
-            filteredData[index]['rollno'],
-            filteredData[index]['mobile_no'],
-            filteredData[index]['mail'],
-            filteredData[index]['dob'],
-            filteredData[index]['gender'],
-            filteredData[index]['degree'],
-            filteredData[index]['blood_group'],
-          );
+              // filteredData[index]['name'],
+              // filteredData[index]['rollno'],
+              // filteredData[index]['mobile_no'],
+              // filteredData[index]['mail'],
+              // filteredData[index]['dob'],
+              // filteredData[index]['gender'],
+              // filteredData[index]['degree'],
+              // filteredData[index]['blood_group'],
+              // filteredData[index]['regno'],
+              // filteredData[index]['community'],
+
+              filteredData[index]['name'],
+              filteredData[index]['rollno'],
+              filteredData[index]['regno'],
+              filteredData[index]['dob'],
+              filteredData[index]['clg_mail'],
+              filteredData[index]['mobileno'],
+              filteredData[index]['blood_group'],
+              filteredData[index]['degree'],
+              filteredData[index]['community'],
+              filteredData[index]['pers_mail'],
+              filteredData[index]['10thmark'],
+              filteredData[index]['10thpercentage'],
+              filteredData[index]['12thmark'],
+              filteredData[index]['12th_per'],
+              filteredData[index]['12thcutoff'],
+              filteredData[index]['diplomapercentage'],
+              filteredData[index]['quota'],
+              filteredData[index]['1stsemestergpa'],
+              filteredData[index]['2ndsemestergpa'],
+              filteredData[index]['3rdsemestergpa'],
+              filteredData[index]['cgpa'],
+              filteredData[index]['historyofarrears'],
+              filteredData[index]['curr_arrear']);
         },
       ),
     );
