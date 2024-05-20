@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:studentportfolio/api.dart';
 
@@ -10,6 +12,8 @@ void main() {
       home: ApiEndpoint(),
     ),
   );
+  // print('hello');
+  // print(data.length);
 }
 
 class LandingPageProfile extends StatefulWidget {
@@ -23,7 +27,9 @@ class LandingPageProfile extends StatefulWidget {
   // final String blood_group;
   // final String regno;
   // final String community;
+  // final String img;
   final String name;
+  final String image;
   final String rollno;
   final String regno;
   final String dob;
@@ -45,6 +51,7 @@ class LandingPageProfile extends StatefulWidget {
   final String _3rdsemestergpa;
   final String cgpa;
   final String historyofarrears;
+  final String arrear;
   final String curr_arrear;
 
   const LandingPageProfile(
@@ -56,11 +63,13 @@ class LandingPageProfile extends StatefulWidget {
     // this.gender,
     // this.degree,
     // this.blood_group,
-    // this.regno,
     // this.community,
+
     this.name,
+    this.image,
     this.rollno,
     this.regno,
+    // this.regno,
     this.dob,
     this.clg_mail,
     this.mobileno,
@@ -80,6 +89,7 @@ class LandingPageProfile extends StatefulWidget {
     this._3rdsemestergpa,
     this.cgpa,
     this.historyofarrears,
+    this.arrear,
     this.curr_arrear, {
     Key? key,
   }) : super(key: key);
@@ -115,6 +125,7 @@ class _LandingPageProfileState extends State<LandingPageProfile> {
                 [
                   {
                     'name': widget.name,
+                    'img': widget.image,
                     'rollno': widget.rollno,
                     'regno': widget.regno,
                     'dob': widget.dob,
@@ -136,6 +147,7 @@ class _LandingPageProfileState extends State<LandingPageProfile> {
                     '3rdsemestergpa': widget._3rdsemestergpa,
                     'cgpa': widget.cgpa,
                     'historyofarrears': widget.historyofarrears,
+                    'count': widget.arrear,
                     'curr_arrear': widget.curr_arrear
                   }
                 ],
@@ -149,6 +161,7 @@ class _LandingPageProfileState extends State<LandingPageProfile> {
               child: Image.asset(
                 'assets/user.jpg',
               ),
+              // child: Image.network('https://i.imgur.com/Yas9TtE.jpeg'),
             ),
           ),
           title: Center(
@@ -171,34 +184,32 @@ class StudentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Student Detail'),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(8),
-        children: [
-          // Image.asset('assets/freepik.jpg'),
-          const SizedBox(height: 20),
-          Center(
-            child: CircleAvatar(
-              radius: 90,
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/HARI HARA SUDHAN-22IT14.jpg',
-                  width: 160,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 30),
-          Column(
+        appBar: AppBar(
+          title: const Text('Student Detail'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               for (var item in data)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 20),
+                    Center(
+                      child: CircleAvatar(
+                        radius: 90,
+                        child: ClipOval(
+                          child: Image.asset(
+                            // 'assets/user2.jpg',
+                            item['img'], width: 160,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+
                     // Profile('Name', Icons.person, item['name']),
                     // Profile('Rollno', Icons.assignment_ind, item['rollno']),
                     // Profile('Phone', Icons.phone, item['phone']),
@@ -218,22 +229,41 @@ class StudentDetail extends StatelessWidget {
                     Profile('DOB', Icons.date_range, item['dob']),
                     Profile('College Email', Icons.email, item['clg_mail']),
                     Profile('Mobile Number', Icons.phone, item['mobileno']),
-                    Profile('Blood Group', Icons.local_hospital, item['blood_group']),
+                    Profile('Blood Group', Icons.local_hospital,
+                        item['blood_group']),
                     Profile('Degree', Icons.school, item['degree']),
                     Profile('Community', Icons.group, item['community']),
                     Profile('Personal Email', Icons.email, item['pers_mail']),
                     Profile('10th Mark', Icons.assignment, item['10thmark']),
-                    Profile('10th Percentage', Icons.assignment, item['10thpercentage']),
+                    Profile('10th Percentage', Icons.assignment,
+                        item['10thpercentage']),
                     Profile('12th Mark', Icons.assignment, item['12thmark']),
-                    Profile('12th Percentage', Icons.assignment, item['12th_per']),
-                    Profile('12th Cutoff', Icons.assignment, item['12thcutoff']),
-                    Profile('Diploma Percentage', Icons.assignment,item['diplomapercentage']),
+                    Profile(
+                        '12th Percentage', Icons.assignment, item['12th_per']),
+                    Profile(
+                        '12th Cutoff', Icons.assignment, item['12thcutoff']),
+                    Profile('Diploma Percentage', Icons.assignment,
+                        item['diplomapercentage']),
                     Profile('Quota', Icons.assignment, item['quota']),
-                    Profile('1st Semester GPA', Icons.assignment,item['1stsemestergpa']),
-                    Profile('2nd Semester GPA', Icons.assignment,item['2ndsemestergpa']),
-                    Profile('3rd Semester GPA', Icons.assignment,item['3rdsemestergpa']),
+                    Profile('1st Semester GPA', Icons.assignment,
+                        item['1stsemestergpa']),
+                    Profile('2nd Semester GPA', Icons.assignment,
+                        item['2ndsemestergpa']),
+                    Profile('3rd Semester GPA', Icons.assignment,
+                        item['3rdsemestergpa']),
                     Profile('CGPA', Icons.assignment, item['cgpa']),
-                    Profile('History of Arrears', Icons.warning, item['historyofarrears']),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                  title: Text(item['count']),
+                                  content: const Text('This is my content'),
+                                ));
+                      },
+                      child: Profile('History of Arrears', Icons.warning,
+                          item['historyofarrears']),
+                    ),
                     Profile(
                         'Current Arrear', Icons.warning, item['curr_arrear'])
 
@@ -242,9 +272,7 @@ class StudentDetail extends StatelessWidget {
                 ),
             ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 
@@ -280,16 +308,20 @@ class Profile extends StatelessWidget {
           ),
         ],
       ),
-      child: ListTile(
-        leading: Icon(
-          icon,
-          color: iconColor,
-        ),
-        title: Text(
-          name,
-          style: const TextStyle(color: Colors.black),
-        ),
-        subtitle: Text(subtitle),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(
+              icon,
+              color: iconColor,
+            ),
+            title: Text(
+              name,
+              style: const TextStyle(color: Colors.black),
+            ),
+            subtitle: Text(subtitle),
+          ),
+        ],
       ),
     );
   }
