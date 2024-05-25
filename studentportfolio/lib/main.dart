@@ -34,11 +34,13 @@ class LandingPageProfile extends StatefulWidget {
   final String regno;
   final String dob;
   final String clg_mail;
-  final String mobileno;
-  final String blood_group;
-  final String degree;
-  final String community;
   final String pers_mail;
+  final String host_das;
+  final String stud_mobileno;
+  final String Parent_mobileno;
+  final String alter_parent_mobileno;
+  final String blood_group;
+  final String community;
   final String _10thmark;
   final String _10thpercentage;
   final String _12thmark;
@@ -69,14 +71,15 @@ class LandingPageProfile extends StatefulWidget {
     this.image,
     this.rollno,
     this.regno,
-    // this.regno,
     this.dob,
     this.clg_mail,
-    this.mobileno,
-    this.blood_group,
-    this.degree,
-    this.community,
     this.pers_mail,
+    this.host_das,
+    this.stud_mobileno,
+    this.Parent_mobileno,
+    this.alter_parent_mobileno,
+    this.blood_group,
+    this.community,
     this._10thmark,
     this._10thpercentage,
     this._12thmark,
@@ -130,11 +133,14 @@ class _LandingPageProfileState extends State<LandingPageProfile> {
                     'regno': widget.regno,
                     'dob': widget.dob,
                     'clg_mail': widget.clg_mail,
-                    'mobileno': widget.mobileno,
+                    'personal_mail':widget.pers_mail,
+                    'mobileno': widget.stud_mobileno,
+                    'hostal_or_dascollar': widget.host_das,
+                    'stud_mobileno': widget.stud_mobileno,
+                    'parent_mobileno': widget.Parent_mobileno,
+                    'alternative_parent_mobileno': widget.alter_parent_mobileno,
                     'blood_group': widget.blood_group,
-                    'degree': widget.degree,
                     'community': widget.community,
-                    'pers_mail': widget.pers_mail,
                     '10thmark': widget._10thmark,
                     '10thpercentage': widget._10thpercentage,
                     '12thmark': widget._12thmark,
@@ -200,7 +206,7 @@ class StudentDetail extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 90,
                         child: ClipOval(
-                          child: Image.asset(
+                          child: Image.network(
                             // 'assets/user2.jpg',
                             item['img'], width: 160,
                             fit: BoxFit.fill,
@@ -210,48 +216,40 @@ class StudentDetail extends StatelessWidget {
                     ),
                     const SizedBox(height: 30),
 
-                    // Profile('Name', Icons.person, item['name']),
-                    // Profile('Rollno', Icons.assignment_ind, item['rollno']),
-                    // Profile('Phone', Icons.phone, item['phone']),
-                    // Profile('mail', Icons.mail, item['mail'].toString()),
-                    // Profile('DOB', Icons.calendar_month_rounded, item['dob']),
-                    // Profile('Gender', Icons.male_rounded, item['gender']),
-                    // Profile('Degree', Icons.workspace_premium, item['degree']),
-                    // Profile(
-                    //     'BloodGroup', Icons.water_drop, item['blood_group']),
-                    // Profile('Degree', Icons.workspace_premium, item['degree']),
-                    // Profile(
-                    //     'Degree', Icons.workspace_premium, item['community']),
-
                     Profile('Name', Icons.person, item['name']),
                     Profile('Rollno', Icons.assignment_ind, item['rollno']),
                     Profile('Regno', Icons.perm_identity, item['regno']),
-                    Profile('DOB', Icons.date_range, item['dob']),
-                    Profile('College Email', Icons.email, item['clg_mail']),
+                    Profile('DOB', Icons.calendar_month_rounded, item['dob']),
+                    Profile('Official mail', Icons.email, item['clg_mail']),
+                    Profile('Personal mail', Icons.email, item['personal_mail']),
                     Profile('Mobile Number', Icons.phone, item['mobileno']),
-                    Profile('Blood Group', Icons.local_hospital,
+                    Profile('Hostel or Day Scholar', Icons.home,
+                        item['hostal_or_dascollar']),
+                    Profile('Parent Mobile Number', Icons.phone,
+                        item['parent_mobileno']),
+                    Profile(
+                        'Alternative Parent Mobile Number',
+                        Icons.phone_in_talk,
+                        item['alternative_parent_mobileno']),
+                    Profile('Blood Group', Icons.water_drop,
                         item['blood_group']),
-                    Profile('Degree', Icons.school, item['degree']),
-                    Profile('Community', Icons.group, item['community']),
-                    Profile('Personal Email', Icons.email, item['pers_mail']),
-                    Profile('10th Mark', Icons.assignment, item['10thmark']),
-                    Profile('10th Percentage', Icons.assignment,
+                    Profile('Community', Icons.people, item['community']),
+                    Profile('10th Mark', Icons.school, item['10thmark']),
+                    Profile('10th Percentage', Icons.percent,
                         item['10thpercentage']),
-                    Profile('12th Mark', Icons.assignment, item['12thmark']),
-                    Profile(
-                        '12th Percentage', Icons.assignment, item['12th_per']),
-                    Profile(
-                        '12th Cutoff', Icons.assignment, item['12thcutoff']),
-                    Profile('Diploma Percentage', Icons.assignment,
+                    Profile('12th Mark', Icons.school, item['12thmark']),
+                    Profile('12th Percentage', Icons.percent, item['12th_per']),
+                    Profile('12th Cutoff', Icons.local_activity_sharp, item['12thcutoff']),
+                    Profile('Diploma Percentage', Icons.score,
                         item['diplomapercentage']),
                     Profile('Quota', Icons.assignment, item['quota']),
-                    Profile('1st Semester GPA', Icons.assignment,
+                    Profile('1st Semester GPA', Icons.star_rate_rounded,
                         item['1stsemestergpa']),
-                    Profile('2nd Semester GPA', Icons.assignment,
+                    Profile('2nd Semester GPA', Icons.star_rate_rounded,
                         item['2ndsemestergpa']),
-                    Profile('3rd Semester GPA', Icons.assignment,
+                    Profile('3rd Semester GPA', Icons.star_rate_rounded,
                         item['3rdsemestergpa']),
-                    Profile('CGPA', Icons.assignment, item['cgpa']),
+                    Profile('CGPA', Icons.workspace_premium, item['cgpa']),
                     InkWell(
                       onTap: () {
                         showDialog(
@@ -286,13 +284,15 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    Color iconColor = Colors.black; // Default icon color
-    if (name == 'BloodGroup') {
-      iconColor = Colors.red; // Set color to red for 'BloodGroup'
-    } else if (name == 'Degree') {
-      iconColor = const Color.fromARGB(255, 255, 200, 1);
-    }
+    final iconColorMap = {
+      'Blood Group': Colors.red,
+      'CGPA': const Color.fromARGB(255, 255, 200, 1),
+      '1st Semester GPA': Colors.purple[200],
+      '2nd Semester GPA': Colors.purple[200],
+      '3rd Semester GPA': Colors.purple[200],
+    };
+    final iconColor = iconColorMap[name] ?? Colors.black;
+
     return Container(
       margin: const EdgeInsets.all(14),
       padding: const EdgeInsets.all(10),
