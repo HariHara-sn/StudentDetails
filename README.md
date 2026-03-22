@@ -1,8 +1,4 @@
-# studentportfolio
-
-A new Flutter project.
-
-## Getting Started
+## studentportfolio
 
 I have Designed this project for Our IT Department
 
